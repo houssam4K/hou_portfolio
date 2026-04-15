@@ -1,0 +1,120 @@
+.footer {
+  padding: 6rem 0 2.5rem;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, transparent, rgba(0, 255, 156, 0.02));
+  position: relative;
+  z-index: 1;
+}
+
+.footer__cta {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 5rem;
+}
+
+.footer__cta .section-tag {
+  justify-content: center;
+}
+
+.footer__heading {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #fff, #9fb5c9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer__heading span {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer__sub {
+  color: var(--muted);
+  margin-bottom: 2.2rem;
+  font-size: 1rem;
+}
+
+.footer__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 2rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  letter-spacing: 1px;
+  transition: all 0.25s ease;
+}
+
+.footer__btn:hover {
+  background: rgba(0, 255, 156, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 255, 156, 0.25);
+  transform: translateY(-2px);
+}
+
+.footer__btn span {
+  transition: transform 0.25s ease;
+}
+
+.footer__btn:hover span {
+  transform: translateX(5px);
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer__logo {
+  font-family: var(--font-mono);
+  color: #fff;
+  font-weight: 700;
+}
+
+.footer__logo span {
+  color: var(--accent);
+}
+
+.footer__cursor {
+  animation: blink 1s steps(1) infinite;
+}
+
+.footer__links {
+  display: flex;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.footer__links a {
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.footer__links a:hover {
+  color: var(--accent);
+}
+
+.footer__copy {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.footer__copy code {
+  color: var(--accent);
+  background: rgba(0, 255, 156, 0.08);
+  padding: 2px 6px;
+  border-radius: 3px;
+}

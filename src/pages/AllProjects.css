@@ -1,0 +1,309 @@
+.ap {
+  padding-top: 6rem;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Hero ── */
+.ap__hero {
+  padding: 3.5rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+  background: radial-gradient(
+    ellipse at top left,
+    rgba(0, 229, 255, 0.07),
+    transparent 55%
+  );
+}
+
+.ap__back {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  transition: transform 0.25s ease;
+}
+.ap__back:hover { transform: translateX(-4px); }
+
+.ap__terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 1rem;
+  background: #0a0f14;
+  border: 1px solid var(--border);
+  border-bottom: 2px solid var(--accent-2);
+  border-radius: 8px 8px 0 0;
+  max-width: 560px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
+}
+
+.ap__dots {
+  display: flex;
+  gap: 6px;
+}
+.ap__dots span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.ap__dots span:nth-child(1) { background: #ff5f56; }
+.ap__dots span:nth-child(2) { background: #ffbd2e; }
+.ap__dots span:nth-child(3) { background: #27c93f; }
+
+.ap__path {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.ap__pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-2);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-radius: 99px;
+  background: rgba(0, 229, 255, 0.07);
+}
+
+.ap__title {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  letter-spacing: -1.2px;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(90deg, #fff, #9fb5c9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ap__sub {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 560px;
+}
+
+/* ── Body ── */
+.ap__body {
+  padding: 3rem 0 5rem;
+}
+
+/* ── Filters ── */
+.ap__filters {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem 1.4rem;
+  background: rgba(13, 20, 27, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.ap__filter-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ap__filter-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ap__filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  color: var(--muted);
+  background: transparent;
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
+}
+
+.ap__filter-btn:hover {
+  border-color: rgba(0, 255, 156, 0.4);
+  color: var(--accent);
+  background: rgba(0, 255, 156, 0.06);
+}
+
+.ap__filter-btn.is-active {
+  background: rgba(0, 255, 156, 0.12);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 12px rgba(0, 255, 156, 0.2);
+}
+
+/* ── Count ── */
+.ap__count {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.ap__count-num {
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* ── Grid ── */
+.ap__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ── Card ── */
+.ap-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.85rem 1.75rem 1.5rem;
+  background: linear-gradient(180deg, rgba(13, 20, 27, 0.92), rgba(10, 15, 20, 0.92));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  color: inherit;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.ap-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(0, 255, 156, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+}
+
+.ap-card__glow {
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  filter: blur(75px);
+  opacity: 0.1;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.ap-card:hover .ap-card__glow {
+  opacity: 0.22;
+}
+
+.ap-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  position: relative;
+}
+
+.ap-card__num {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.ap-card__badge {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--muted);
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 0.68rem;
+}
+
+.ap-card__title {
+  font-size: 1.3rem;
+  letter-spacing: -0.4px;
+  position: relative;
+}
+
+.ap-card__tagline {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-2);
+  position: relative;
+}
+
+.ap-card__desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  flex: 1;
+  position: relative;
+}
+
+.ap-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(0, 255, 156, 0.2);
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.ap-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.ap-card__tags span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  background: rgba(0, 255, 156, 0.07);
+  border: 1px solid rgba(0, 255, 156, 0.22);
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+.ap-card__open {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ap-card__open span {
+  transition: transform 0.25s ease;
+}
+.ap-card:hover .ap-card__open span {
+  transform: translateX(5px);
+}
+
+@media (max-width: 600px) {
+  .ap__grid {
+    grid-template-columns: 1fr;
+  }
+  .ap__filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
