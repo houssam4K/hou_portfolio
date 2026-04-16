@@ -206,9 +206,10 @@
 }
 
 .pd__content p {
-  color: var(--muted);
+  color: var(--muted-2);
   margin-bottom: 1rem;
   font-size: 1rem;
+  line-height: 1.7;
 }
 
 .pd__content ul {
@@ -232,6 +233,23 @@
   position: absolute;
   left: 0;
   color: var(--accent);
+}
+
+/* Reflective/learning bullets — softer, cyan accent to read
+   distinct from the quantitative results bullets above. */
+.pd__learnings li {
+  font-family: var(--font-sans) !important;
+  font-size: 1rem !important;
+  color: var(--muted-2);
+  padding-left: 1.7rem !important;
+  line-height: 1.65;
+}
+
+.pd__learnings li::before {
+  content: "✦" !important;
+  color: var(--accent-2) !important;
+  font-size: 0.9rem;
+  top: 1px;
 }
 
 .pd__placeholder {

@@ -1,3 +1,4 @@
+import ContactForm from "./ContactForm.jsx";
 import "./Footer.css";
 
 export default function Footer() {
@@ -11,11 +12,15 @@ export default function Footer() {
           </h2>
           <p className="footer__sub">
             I'm open to SOC analyst, threat hunter and junior security engineer
-            roles. Drop a message — I usually respond within 24 hours.
+            roles. Drop a message below — I usually respond within 24 hours.
           </p>
-          <a href="mailto:houssampes17@gmail.com" className="footer__btn">
-            say hello <span>→</span>
-          </a>
+
+          <ContactForm />
+
+          <p className="footer__or">
+            or email me directly at{" "}
+            <a href="mailto:houssampes17@gmail.com">houssampes17@gmail.com</a>
+          </p>
         </div>
 
         <div className="footer__bottom">

@@ -24,6 +24,7 @@ export default function ProjectDetail() {
   const problem = project.problem;
   const approach = project.approach;
   const results = project.results;
+  const keyLearnings = project.keyLearnings;
   const screenshots = project.screenshots;
   const codeSnippets = project.codeSnippets;
   const stack = project.stack || project.tags;
@@ -114,6 +115,17 @@ export default function ProjectDetail() {
                 </section>
               )}
 
+              {keyLearnings && keyLearnings.length > 0 && (
+                <section>
+                  <h2>Key learnings</h2>
+                  <ul className="pd__learnings">
+                    {keyLearnings.map((l, i) => (
+                      <li key={i}>{l}</li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
               {codeSnippets && codeSnippets.length > 0 && (
                 <section>
                   <h2>Code</h2>
@@ -142,7 +154,7 @@ export default function ProjectDetail() {
                 </section>
               )}
 
-              {!problem && !approach && !results && !screenshots && !codeSnippets && (
+              {!problem && !approach && !results && !keyLearnings && !screenshots && !codeSnippets && (
                 <div className="pd__placeholder">
                   <span>full write-up</span>
                   <p>coming soon</p>
@@ -152,7 +164,7 @@ export default function ProjectDetail() {
           </div>
 
           <Link
-            to={`/myapp/projects/${nextProject.slug}`}
+            to={`/projects/${nextProject.slug}`}
             className="pd__next"
           >
             <div>

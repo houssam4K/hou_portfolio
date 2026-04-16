@@ -168,6 +168,102 @@
 
 .hero__right {
   animation: fadeInUp 0.9s ease 0.4s backwards;
+  perspective: 1400px;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-mx: 50%;
+  --tilt-my: 50%;
+}
+
+/* Wrapper that actually rotates in 3D. Terminal renders inside,
+   inheriting the tilt without needing any changes to its markup. */
+.hero__tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform 0.25s cubic-bezier(0.2, 0.6, 0.2, 1);
+  will-change: transform;
+}
+
+/* Sheen that follows the cursor — sits above the terminal,
+   masked so it stays inside the panel and never blocks clicks. */
+.hero__tilt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  background: radial-gradient(
+    260px circle at var(--tilt-mx) var(--tilt-my),
+    rgba(0, 255, 156, 0.18),
+    transparent 60%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  transform: translateZ(40px);
+  transition: opacity 0.3s ease;
+}
+
+/* Soft halo behind the terminal — pushed back in Z so the
+   terminal floats above it. */
+.hero__tilt-glow {
+  position: absolute;
+  inset: -12px;
+  border-radius: 16px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 156, 0.18),
+    rgba(0, 229, 255, 0.08) 50%,
+    transparent 75%
+  );
+  filter: blur(28px);
+  transform: translateZ(-60px);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* ── Perspective grid plane (CSS-only "3D floor" behind the hero) ── */
+.hero__plane {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  width: 200%;
+  height: 70%;
+  transform: translateX(-50%);
+  perspective: 600px;
+  perspective-origin: 50% 0%;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(180deg, transparent 0%, black 30%, transparent 95%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 30%, transparent 95%);
+  opacity: 0.55;
+}
+
+.hero__plane-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 255, 156, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.25) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: rotateX(62deg) translateZ(0);
+  transform-origin: 50% 0%;
+  animation: grid-scroll 14s linear infinite;
+}
+
+@keyframes grid-scroll {
+  from { background-position: 0 0; }
+  to   { background-position: 0 60px; }
+}
+
+/* The .hero needs explicit z-index hierarchy so the plane sits
+   behind the content without bleeding through. */
+.hero__inner {
+  position: relative;
+  z-index: 2;
+}
+.hero__bg {
+  z-index: 1;
 }
 
 .hero__scroll {

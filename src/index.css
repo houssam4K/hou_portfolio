@@ -4,11 +4,13 @@
   --panel: #0d141b;
   --panel-2: #111a23;
   --border: #1a2530;
-  --text: #d6e2ee;
-  --muted: #7a8a9a;
+  --text: #e2ecf6;            /* nudged brighter for AA contrast */
+  --muted: #9aabbd;            /* was #7a8a9a — fails AA on body text */
+  --muted-2: #c2cedb;          /* for body-copy paragraphs */
   --accent: #00ff9c;
   --accent-2: #00e5ff;
   --danger: #ff3864;
+  --focus: #7afcff;            /* high-contrast focus ring */
   --glow: 0 0 22px rgba(0, 255, 156, 0.35);
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, Consolas, monospace;
   --font-sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -125,4 +127,62 @@ p {
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(var(--accent), var(--accent-2));
   border-radius: 8px;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Accessibility
+   ────────────────────────────────────────────────────────────── */
+
+/* Visible focus ring on every interactive element.
+   `:focus-visible` only fires for keyboard / programmatic focus,
+   so mouse users don't see the outline on click. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip-to-content link for screen-reader & keyboard users.
+   Hidden until focused, then drops into the top-left corner. */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  padding: 0.7rem 1.1rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  border-radius: 4px;
+  z-index: 10000;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Generic visually-hidden helper. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Respect users who opted out of animations.
+   Kills the swim row, typewriter caret, scroll arrow, etc. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

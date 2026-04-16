@@ -101,7 +101,7 @@ export default function Projects() {
         </div>
 
         <div className="projects__viewall">
-          <Link to="/myapp/projects" className="projects__viewall-btn">
+          <Link to="/projects" className="projects__viewall-btn">
             <span className="projects__viewall-icon">⌗</span>
             view all {projects.length} projects
             <span>→</span>
@@ -116,7 +116,7 @@ function ProjectCard({ project, index }) {
   const [ref, visible] = useReveal();
   return (
     <Link
-      to={`/myapp/projects/${project.slug}`}
+      to={`/projects/${project.slug}`}
       ref={ref}
       className={`project-card reveal ${visible ? "visible" : ""}`}
       style={{ transitionDelay: `${index * 100}ms` }}

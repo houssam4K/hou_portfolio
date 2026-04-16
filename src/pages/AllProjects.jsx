@@ -81,7 +81,7 @@ function APCard({ project, index }) {
   return (
     <Link
       ref={ref}
-      to={`/myapp/projects/${project.slug}`}
+      to={`/projects/${project.slug}`}
       className={`ap-card reveal ${visible ? "visible" : ""}`}
       style={{ transitionDelay: `${index * 80}ms` }}
     >

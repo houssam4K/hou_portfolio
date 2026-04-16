@@ -98,7 +98,7 @@ export default function SkillCategory() {
                   {skillCategories.map((c) => (
                     <li key={c.slug}>
                       <Link
-                        to={`/myapp/skills/${c.slug}`}
+                        to={`/skills/${c.slug}`}
                         className={c.slug === slug ? "is-active" : ""}
                       >
                         <span>▸</span>
@@ -112,7 +112,7 @@ export default function SkillCategory() {
           </div>
 
           <Link
-            to={`/myapp/skills/${nextCategory.slug}`}
+            to={`/skills/${nextCategory.slug}`}
             className="sc__next"
           >
             <div>

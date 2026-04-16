@@ -9,8 +9,9 @@ import Footer from "../components/Footer.jsx";
 export default function Home() {
   return (
     <>
+      <a href="#about" className="skip-link">Skip to content</a>
       <Navbar />
-      <main>
+      <main id="main">
         <Hero />
         <Whoami />
         <Skills />

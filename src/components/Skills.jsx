@@ -67,7 +67,7 @@ function SkillCard({ group, index }) {
   return (
     <Link
       ref={ref}
-      to={`/myapp/skills/${group.slug}`}
+      to={`/skills/${group.slug}`}
       className={`skill-card reveal ${visible ? "visible" : ""}`}
       style={{ transitionDelay: `${index * 120}ms`, "--card-accent": group.accent }}
     >

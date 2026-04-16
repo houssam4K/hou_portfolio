@@ -106,7 +106,7 @@ export default function NotFound() {
             <Link to="/" className="nf__btn nf__btn--primary">
               <span>←</span> return to base
             </Link>
-            <Link to="/myapp/projects" className="nf__btn nf__btn--ghost">
+            <Link to="/projects" className="nf__btn nf__btn--ghost">
               view all projects
             </Link>
           </div>
