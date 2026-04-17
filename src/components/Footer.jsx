@@ -16,11 +16,6 @@ export default function Footer() {
           </p>
 
           <ContactForm />
-
-          <p className="footer__or">
-            or email me directly at{" "}
-            <a href="mailto:houssampes17@gmail.com">houssampes17@gmail.com</a>
-          </p>
         </div>
 
         <div className="footer__bottom">

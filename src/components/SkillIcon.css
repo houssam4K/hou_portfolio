@@ -5,6 +5,16 @@
   transition: opacity 0.25s ease, filter 0.25s ease, transform 0.25s ease;
 }
 
+/* Drop the per-icon drop-shadow on mobile — the swim row has 40+
+   icons and each shadow is a separate composited layer. Huge jank
+   source on mid-range phones. */
+@media (max-width: 768px) {
+  .skill-icon-img {
+    filter: none;
+    opacity: 1;
+  }
+}
+
 .skill-icon-fallback {
   display: inline-flex;
   align-items: center;

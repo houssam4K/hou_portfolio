@@ -2,10 +2,65 @@
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   max-width: 560px;
 }
 
+/* ──────────────────────────────────────────────────────────────
+   Stats strip under the heading.
+   Tiny design element that makes the section feel data-driven.
+   ────────────────────────────────────────────────────────────── */
+.skills__stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 156, 0.05),
+    rgba(0, 229, 255, 0.03) 50%,
+    transparent
+  );
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: 8px;
+  max-width: 680px;
+}
+
+.skills__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.skills__stat-num {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.skills__stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.skills__stat-sep {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Cards
+   ────────────────────────────────────────────────────────────── */
 .skills__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -16,8 +71,8 @@
 .skill-card {
   background: linear-gradient(180deg, rgba(13, 20, 27, 0.9), rgba(10, 15, 20, 0.9));
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.85rem 1.75rem 1.5rem;
+  border-radius: 14px;
+  padding: 2rem 1.75rem 1.5rem;
   position: relative;
   overflow: hidden;
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
@@ -26,7 +81,94 @@
   gap: 0.75rem;
   color: inherit;
   text-decoration: none;
-  min-height: 290px;
+  min-height: 310px;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Motion-card variant (desktop only). The framer-motion wrapper
+   handles the 3D tilt; this class unlocks the spotlight layer and
+   tells the browser to promote the card to its own layer so the
+   transform doesn't repaint neighbours.
+   ────────────────────────────────────────────────────────────── */
+.skill-card--motion {
+  will-change: transform;
+  transform-style: preserve-3d;
+  /* tilt-managed — drop the CSS hover translateY that would fight
+     the framer-motion transform. */
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.skill-card--motion:hover {
+  transform: none;
+  border-color: color-mix(in srgb, var(--card-accent, var(--accent)) 55%, transparent);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.55),
+    0 0 45px color-mix(in srgb, var(--card-accent, var(--accent)) 22%, transparent);
+}
+
+/* Cursor spotlight — inline `background` is set by framer-motion
+   via useMotionTemplate. Sits above the base, below content. */
+.skill-card__spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  mix-blend-mode: screen;
+  z-index: 1;
+}
+
+.skill-card--motion:hover .skill-card__spotlight {
+  opacity: 1;
+}
+
+/* Push real content above the spotlight. */
+.skill-card__head,
+.skill-card__tagline,
+.skill-card__summary,
+.skill-card__tools,
+.skill-card__open {
+  z-index: 2;
+}
+
+/* Accent bar across the top — fills on hover, picks up the card's
+   own accent colour so each category feels distinct. */
+.skill-card__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--card-accent, var(--accent)),
+    transparent 60%
+  );
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+}
+
+.skill-card:hover .skill-card__bar {
+  opacity: 1;
+}
+
+/* Subtle code-bracket watermark in the corner. Monospace + faint
+   accent — adds depth without competing with the content. */
+.skill-card__corner {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--card-accent, var(--accent));
+  opacity: 0.25;
+  letter-spacing: 1px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.skill-card:hover .skill-card__corner {
+  opacity: 0.7;
+  transform: translateY(-2px);
 }
 
 .skill-card__glow {
@@ -45,12 +187,14 @@
 
 .skill-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(0, 255, 156, 0.4);
-  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.55), 0 0 35px rgba(0, 255, 156, 0.12);
+  border-color: color-mix(in srgb, var(--card-accent, var(--accent)) 45%, transparent);
+  box-shadow:
+    0 25px 55px rgba(0, 0, 0, 0.55),
+    0 0 35px color-mix(in srgb, var(--card-accent, var(--accent)) 18%, transparent);
 }
 
 .skill-card:hover .skill-card__glow {
-  opacity: 0.2;
+  opacity: 0.22;
 }
 
 .skill-card__head {
@@ -63,17 +207,18 @@
 .skill-card__num {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--accent);
+  color: var(--card-accent, var(--accent));
   padding: 3px 8px;
-  border: 1px solid rgba(0, 255, 156, 0.35);
+  border: 1px solid color-mix(in srgb, var(--card-accent, var(--accent)) 40%, transparent);
   border-radius: 4px;
-  background: rgba(0, 255, 156, 0.08);
+  background: color-mix(in srgb, var(--card-accent, var(--accent)) 10%, transparent);
   letter-spacing: 1px;
 }
 
 .skill-card h3 {
   font-size: 1.15rem;
   letter-spacing: -0.3px;
+  flex: 1;
 }
 
 .skill-card__tagline {
@@ -113,40 +258,44 @@
 }
 
 .skill-card:hover .skill-card__tool {
-  border-color: rgba(0, 255, 156, 0.25);
+  border-color: color-mix(in srgb, var(--card-accent, var(--accent)) 30%, transparent);
 }
 
 .skill-card__tool--more {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--accent);
+  color: var(--card-accent, var(--accent));
   font-weight: 700;
 }
 
 .skill-card__open {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: var(--accent);
+  color: var(--card-accent, var(--accent));
   padding-top: 1rem;
   margin-top: 0.25rem;
-  border-top: 1px dashed rgba(0, 255, 156, 0.2);
+  border-top: 1px dashed color-mix(in srgb, var(--card-accent, var(--accent)) 25%, transparent);
   display: flex;
   align-items: center;
   gap: 0.5rem;
   position: relative;
 }
 
-.skill-card__open span {
+.skill-card__open-arrow {
   transition: transform 0.25s ease;
+  display: inline-block;
 }
 
-.skill-card:hover .skill-card__open span {
+.skill-card:hover .skill-card__open-arrow {
   transform: translateX(5px);
 }
 
+/* ──────────────────────────────────────────────────────────────
+   Swimming icon marquee at the bottom of the section.
+   ────────────────────────────────────────────────────────────── */
 .skills__swim {
   margin-top: 3rem;
-  padding: 2rem 0;
+  padding: 2.5rem 0 2rem;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: rgba(13, 20, 27, 0.35);
@@ -154,7 +303,33 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 1.6rem;
+}
+
+.skills__swim-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 2rem;
+}
+
+.skills__swim-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.85); }
 }
 
 .skills__swim::before,
@@ -193,15 +368,12 @@
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   padding: 0.3rem 0;
+  will-change: transform;
 }
 
 @keyframes swim-slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 .swim-icon {
@@ -252,17 +424,60 @@
 }
 
 @keyframes swim-bob {
-  0%, 100% {
-    transform: translateY(0);
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Mobile perf trimming.
+   Cards: drop the blur(70px) glow — 5 live blur layers is the
+   heaviest thing on this section. Swim row: kill the per-icon bob
+   (40+ simultaneous animations) and lighten fade gradients.
+   ────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .skills__stats {
+    gap: 1rem;
+    padding: 0.85rem 1rem;
   }
-  50% {
-    transform: translateY(-8px);
+  .skills__stat-num { font-size: 1.1rem; }
+
+  .skill-card {
+    padding: 1.5rem 1.25rem 1.25rem;
+    min-height: 0;
+  }
+  .skill-card__glow {
+    display: none; /* blur(70px) ×5 is the #1 jank source on mobile */
+  }
+  .skill-card:hover {
+    /* hover on mobile is a sticky tap — don't elevate aggressively */
+    transform: none;
+  }
+
+  .skills__swim {
+    padding: 1.75rem 0 1.25rem;
+    gap: 1.2rem;
+  }
+  .skills__swim::before,
+  .skills__swim::after {
+    width: 60px; /* slimmer fades = fewer fullscreen gradients */
+  }
+
+  .swim-icon {
+    animation: none; /* per-icon bob = biggest swim-row cost on mobile */
+    width: 76px;
+    padding: 0.7rem 0.5rem;
+  }
+  .swim-icon:hover .skill-icon-img {
+    filter: none; /* drop-shadow tap highlight isn't worth it */
   }
 }
 
+/* Fine-grained motion pref — already handled globally, but we
+   make sure the dot pulse is respected here too. */
 @media (prefers-reduced-motion: reduce) {
   .swim-track,
-  .swim-icon {
+  .swim-icon,
+  .skills__swim-dot {
     animation: none;
   }
 }

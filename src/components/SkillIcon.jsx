@@ -29,6 +29,8 @@ export default function SkillIcon({ name, src, size = 36 }) {
       width={size}
       height={size}
       loading="lazy"
+      decoding="async"
+      fetchpriority="low"
       className="skill-icon-img"
       onError={() => setBroken(true)}
     />

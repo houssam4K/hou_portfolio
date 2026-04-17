@@ -75,6 +75,30 @@ body::after {
   opacity: 0.35;
 }
 
+/* ──────────────────────────────────────────────────────────────
+   Mobile performance mode.
+   Fixed backgrounds + mix-blend-mode + fullscreen masks are the
+   biggest frame-time hogs on phones. We drop them below 768px so
+   scrolling stays at 60fps on mid-range Android / iOS.
+   ────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+  body::before {
+    /* keep a much lighter grid, drop the expensive radial mask */
+    background-size: 40px 40px;
+    mask-image: linear-gradient(180deg, black 0%, transparent 90%);
+    -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 90%);
+    opacity: 0.6;
+  }
+  body::after {
+    /* scanlines with mix-blend-mode are the single most expensive
+       paint on mobile — kill them and swap for a cheap overlay. */
+    display: none;
+  }
+}
+
 #root {
   position: relative;
   z-index: 1;
