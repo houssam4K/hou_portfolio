@@ -101,6 +101,11 @@ export default function Projects() {
         </div>
 
         <div className="projects__viewall">
+          {projects.length > 3 && (
+            <p className="projects__viewall-hint">
+              showing 3 of {projects.length} — see the rest below
+            </p>
+          )}
           <Link to="/projects" className="projects__viewall-btn">
             <span className="projects__viewall-icon">⌗</span>
             view all {projects.length} projects

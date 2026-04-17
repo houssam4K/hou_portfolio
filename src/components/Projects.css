@@ -1,7 +1,26 @@
 .projects__viewall {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
   margin-top: 2.5rem;
+}
+
+/* "showing 3 of N" hint — desktop hides it because the carousel
+   already shows all projects. Mobile shows it so the user knows
+   there's more beyond the three featured cards. */
+.projects__viewall-hint {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .projects__viewall-hint {
+    display: block;
+  }
 }
 
 .projects__viewall-btn {
@@ -243,4 +262,70 @@
   background: var(--accent);
   width: 42px;
   box-shadow: 0 0 8px var(--accent);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Mobile: turn the horizontal carousel into a vertical stack.
+   The horizontal snap track captured every vertical swipe on
+   touch devices and made the page feel broken — users had to
+   swipe through all 5 cards before they could keep scrolling.
+   On phones we just stack cards top-to-bottom and hide the
+   carousel-specific UI.
+   ────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .projects__track {
+    flex-direction: column;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: 1.25rem;
+    padding: 0.5rem 0;
+    /* Belt-and-suspenders: tell the browser this area only
+       reacts to vertical pans, so no touch gets eaten. */
+    touch-action: pan-y;
+  }
+
+  .project-card {
+    flex: 0 0 auto;
+    width: 100%;
+    min-height: 0;
+    scroll-snap-align: none;
+  }
+
+  /* Remove hover lift on touch devices — `:hover` on mobile
+     sticks after a tap and leaves the card floating. */
+  .project-card:hover {
+    transform: none;
+  }
+
+  /* Carousel controls & dots aren't useful for a vertical stack. */
+  .projects__controls,
+  .projects__dots {
+    display: none;
+  }
+
+  .projects__head {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Only show the first 3 projects as a "featured" preview on
+     phones — the full list lives behind the "view all" button
+     below. This keeps the homepage scroll length reasonable
+     no matter how many projects you add to projects.js. */
+  .projects__track > .project-card:nth-child(n + 4) {
+    display: none;
+  }
+
+  /* Make the "view all" button more prominent on mobile since
+     it's now the main path to the rest of the portfolio. */
+  .projects__viewall {
+    margin-top: 1.5rem;
+  }
+  .projects__viewall-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1.05rem 1.5rem;
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(0, 255, 156, 0.06);
+  }
 }

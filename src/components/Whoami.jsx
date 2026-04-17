@@ -11,7 +11,12 @@ const roles = [
 ];
 
 export default function Whoami() {
-  const [ref, visible] = useReveal();
+  // Kick the reveal earlier on mobile — the card is tall, so
+  // the default 15% visibility threshold makes it feel laggy.
+  const [ref, visible] = useReveal({
+    threshold: 0.05,
+    rootMargin: "0px 0px -10% 0px",
+  });
 
   return (
     <section id="whoami" className="section whoami">
